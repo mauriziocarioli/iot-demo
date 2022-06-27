@@ -1,5 +1,5 @@
 // camel-k: language=java
-// camel-k: resource=push-gateway-sink-transform.groovy
+// camel-k: resource=file:push-gateway-sink-transform.groovy
 // camel-k: dependency=camel-jackson
 // camel-k: dependency=camel-groovy
 // camel-k: dependency=mvn:io.prometheus:simpleclient_pushgateway:0.9.0

@@ -3,8 +3,8 @@ import io.prometheus.client.Gauge
 
 registry = new CollectorRegistry()
 
-tachometerRpmGuage = Gauge.build().name("pumpjack_tachometer_rpm").help("RPM reading of the tachometer.").register(registry)
-piezoVibrationFrequencyGuage = Gauge.build().name("pumpjack_piezo_vibration_hz").help("Frequency (in Hz) reading of the piezo vibration sensor.").register(registry)
+tachometerRpmGauge = Gauge.build().name("pumpjack_tachometer_rpm").help("RPM reading of the tachometer.").register(registry)
+piezoVibrationFrequencyGauge = Gauge.build().name("pumpjack_piezo_vibration_hz").help("Frequency (in Hz) reading of the piezo vibration sensor.").register(registry)
 
 request.body?.each() { body ->
     data = body['data']
@@ -12,10 +12,10 @@ request.body?.each() { body ->
         case 'heartbeat':
             break
         case 'tachometer':
-            tachometerRpmGuage.set(data['rpm'])
+            tachometerRpmGauge.set(data['rpm'])
             break
         case 'piezo':
-            piezoVibrationFrequencyGuage.set(data['vibrationFrequency'])
+            piezoVibrationFrequencyGauge.set(data['vibrationFrequency'])
             break
         default:
             throw new IllegalArgumentException("Unknown metric type [${body['type']}]")

@@ -16,6 +16,10 @@
 - Install and run Red Hat AMQ Broker [https://developers.redhat.com/products/amq/hello-world]
 
   - _This should be done outside of OpenShift simulating the "Field Environment"._
+  - _On a Mac do 
+                brew install apache-activemq
+                brew services start activemq
+    -the web console is at localhost:8161
 
 ### AMQ Streams
 
@@ -80,14 +84,14 @@
   oc create secret generic artemis-source-secret --from-file=application.properties=./bridges/artemis-source-secret.properties
   kamel run \
     --namespace iot-demo \
-    --configmap artemis-source-configmap \
-    --secret artemis-source-secret \
+    --config configmap:artemis-source-configmap \
+    --config secret:artemis-source-secret \
     ./bridges/ArtemisSource.java
 
   oc create configmap push-gateway-sink-configmap --from-file=application.properties=./bridges/push-gateway-sink-configmap.properties
   kamel run \
     --namespace iot-demo \
-    --configmap push-gateway-sink-configmap \
+    --config configmap:push-gateway-sink-configmap \
     ./bridges/PushGatewaySink.java
   ```
 
